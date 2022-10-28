@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.ifpb.dac.guilherme.projetojpa.business.service.CarService;
+import br.edu.ifpb.dac.guilherme.projetojpa.business.service.ConverterService;
 import br.edu.ifpb.dac.guilherme.projetojpa.model.entity.Car;
 import br.edu.ifpb.dac.guilherme.projetojpa.presentation.dto.CarDTO;
-import br.edu.ifpb.dac.guilherme.projetojpa.service.CarService;
-import br.edu.ifpb.dac.guilherme.projetojpa.service.ConverterService;
+
 
 @RestController
 @RequestMapping("/api/car")

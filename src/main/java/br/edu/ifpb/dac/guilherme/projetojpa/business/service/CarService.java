@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.guilherme.projetojpa.service;
+package br.edu.ifpb.dac.guilherme.projetojpa.business.service;
 
 import java.util.List;
 
@@ -8,8 +8,9 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.stereotype.Service;
 
-import br.edu.ifpb.dac.guilherme.projetojpa.model.dao.CarDAO;
+
 import br.edu.ifpb.dac.guilherme.projetojpa.model.entity.Car;
+import br.edu.ifpb.dac.guilherme.projetojpa.model.repository.CarRepository;
 
 
 
@@ -17,23 +18,23 @@ import br.edu.ifpb.dac.guilherme.projetojpa.model.entity.Car;
 public class CarService {
 	
 	@Autowired
-	private CarDAO carDAO;
+	private CarRepository carRepository;
 	
 	public void save(Car car) {
-		carDAO.save(car);
+		carRepository.save(car);
 	}
 
 	public void delete(Integer id) {
-		carDAO.deleteById(id);
+		carRepository.deleteById(id);
 	}
 
 	public void update(Car car) {
-		carDAO.save(car);
+		carRepository.save(car);
 	}
 	
 	public List<Car> find(Car car) {
 		Example<Car> example = Example.of(car, ExampleMatcher.matching().withIgnoreCase().withStringMatcher(StringMatcher.CONTAINING));
-		return carDAO.findAll(example);
+		return carRepository.findAll(example);
 	}
 
 }

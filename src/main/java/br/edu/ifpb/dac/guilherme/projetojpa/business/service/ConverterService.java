@@ -1,4 +1,4 @@
-package br.edu.ifpb.dac.guilherme.projetojpa.service;
+package br.edu.ifpb.dac.guilherme.projetojpa.business.service;
 
 import java.util.ArrayList;
 import java.util.List;
