@@ -59,7 +59,7 @@ public class OwnerController {
 	}
 
 	@DeleteMapping("{id}")
-	public ResponseEntity delete(@PathVariable("id") Integer id) {
+	public ResponseEntity delete(@PathVariable("id") Long id) {
 		try {
 			ownerService.delete(id);
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -70,13 +70,15 @@ public class OwnerController {
 	}
 
 	@GetMapping
-	public ResponseEntity find(@RequestParam(value = "id", required = false) Integer id,
-			@RequestParam(value = "licencePlate", required = false) String name) {
+	public ResponseEntity find(@RequestParam(value = "id", required = false) Long id,
+			@RequestParam(value = "licencePlate", required = false) String name ,
+			@RequestParam(value = "licencePlate", required = false) String email) {
 
 		try {
 			Owner filter = new Owner();
 			filter.setId(id);
 			filter.setName(name);
+			filter.setEmail(email);
 
 			List<Owner> entities = ownerService.find(filter);
 			List<OwnerDTO> dtos = converterService.listOwnerToDTO(entities);

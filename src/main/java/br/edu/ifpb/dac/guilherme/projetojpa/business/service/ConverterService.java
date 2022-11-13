@@ -55,14 +55,16 @@ public class ConverterService {
 		OwnerDTO dto = new OwnerDTO();
 		dto.setId(owner.getId());
 		dto.setName(owner.getName());
+		dto.setEmail(owner.getEmail());
 		
 		return dto;
 	}
 	
 	public Owner dTOToOwner (OwnerDTO dto) {
 		Owner owner = new Owner();
-		owner.setId(dto.getId());
 		owner.setName(dto.getName());
+		owner.setEmail(dto.getEmail());
+		owner.setPassword(dto.getPassword());
 		
 		return owner;
 	}

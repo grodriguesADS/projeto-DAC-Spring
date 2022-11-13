@@ -1,6 +1,8 @@
 package br.edu.ifpb.dac.guilherme.projetojpa.model.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,28 +11,39 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 @Entity
-public class Owner implements Serializable {
+public class Owner implements Serializable,  UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 
 	private String name;
+	
+	private String email;
+	
+	private String password;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	private List<SystemRole> roles;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "owner")
 	private Set<Car> cars;
 	
 	
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -52,7 +65,75 @@ public class Owner implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Owner[Id = " + id + " Name of owner =" + name + "]";
+		return "Owner[Id = " + id + " Owner =" + name + "]";
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public List<SystemRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<SystemRole> roles) {
+		this.roles = roles;
+	}
+
+	public Set<Car> getCars() {
+		return cars;
+	}
+
+	public void setCars(Set<Car> cars) {
+		this.cars = cars;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+
+		return roles;
+	}
+
+	@Override
+	public String getUsername() {
+
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+	
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+	
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		
+		return true;
 	}
 
 }
